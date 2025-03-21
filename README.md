@@ -1,6 +1,6 @@
-<a href='https://github.com/ColudAI/SAI-Talker/blob/main/README_EN.MD'>English</a>
+<a href='https://github.com/ColudAI/SAI-Talker/blob/main/README_EN.MD'>English</a>    <a href='https://coludai.cn'>前往ColudAI</a>
 # SAI-Talker
-与SAI随时对话文件下载，目前不打算开源。
+与SAI随时对话文件下载，目前不打算开源,以后也不打算开源。
 ## 出品
 ColudAI.cn
 NaOH 氢氧化钠
