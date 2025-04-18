@@ -1,0 +1,214 @@
+
+<!-- COLUDAI.CN         BY NAOH 2025.04.18-->
+<!-- 请自行配置请求地址 不然会报错 如果您是想要获取token的代码,可自取。-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAI-MD5 Token Generator</title>
+    <!-- 引入 MD5.js 库 -->
+    <script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css">
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <style>
+        button{
+            background-color: #2196F3 !important;
+    color: #fff !important;
+            position: relative;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    min-width: 88px;
+    height: 28px;
+    margin: 0;
+    padding: 0 3px;
+    overflow: hidden;
+    color: inherit;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 23px;
+    letter-spacing: .04em;
+    white-space: nowrap;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    vertical-align: middle;
+    background: 0 0;
+    border: none;
+    border-radius: 4px;
+    outline: 0;
+    cursor: pointer;
+    -webkit-transition: all .2s cubic-bezier(.4,0,.2,1), -webkit-box-shadow .2s cubic-bezier(.4,0,1,1);
+    transition: all .2s cubic-bezier(.4,0,.2,1), -webkit-box-shadow .2s cubic-bezier(.4,0,1,1);
+    transition: all .2s cubic-bezier(.4,0,.2,1), box-shadow .2s cubic-bezier(.4,0,1,1);
+    transition: all .2s cubic-bezier(.4,0,.2,1), box-shadow .2s cubic-bezier(.4,0,1,1), -webkit-box-shadow .2s cubic-bezier(.4,0,1,1);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    will-change: box-shadow;
+    zoom: 1;
+    -webkit-user-drag: none;
+    }
+    button:hover{
+        background-color: #a4d6ff !important;
+    color: #fff !important;
+
+
+    position: relative;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    min-width: 88px;
+    height: 28px;
+    margin: 0;
+    padding: 0 3px;
+    overflow: hidden;
+    color: inherit;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 23px;
+    letter-spacing: .04em;
+    white-space: nowrap;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    vertical-align: middle;
+    background: 0 0;
+    border: none;
+    border-radius: 4px;
+    outline: 0;
+    cursor: pointer;
+    -webkit-transition: all .2s cubic-bezier(.4,0,.2,1), -webkit-box-shadow .2s cubic-bezier(.4,0,1,1);
+    transition: all .2s cubic-bezier(.4,0,.2,1), -webkit-box-shadow .2s cubic-bezier(.4,0,1,1);
+    transition: all .2s cubic-bezier(.4,0,.2,1), box-shadow .2s cubic-bezier(.4,0,1,1);
+    transition: all .2s cubic-bezier(.4,0,.2,1), box-shadow .2s cubic-bezier(.4,0,1,1), -webkit-box-shadow .2s cubic-bezier(.4,0,1,1);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    will-change: box-shadow;
+    zoom: 1;
+    -webkit-user-drag: none;
+    }
+    </style>
+</head>
+<body style="    margin-left: 19px;">
+    <div class="mdui-container"></div>
+    <h1>MD5 获取 Token</h1>
+    <span> [按照SAI-api要求生成,可查看源码,刷新后更新Token]</span>
+    <p>Token:  <kbd style="    padding: 2px 6px;
+        color: #fff;
+        font-size: 90%;
+        background-color: #333;
+        border-radius: 2px;" data-v-c18d598e=""><span id="token"></span></kbd></p>
+    <button  id="sendRequest">发送请求</button>
+<p>2019-2025 ColudAI NaOH</p>
+</div>
+    <script>
+
+
+
+
+        // 获取当前日期并格式化为 YYYY-MM-DD 格式
+        function getCurrentDate() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        // 主逻辑
+        function generateToken() {
+            // 获取当前日期
+            const currentDate = getCurrentDate();
+            console.log("当前日期:", currentDate);
+
+            // 使用 MD5 加密日期并取前六位
+            const dateMd5 = md5(currentDate);
+            const dateMd5FirstSix = dateMd5.substring(0, 6);
+            console.log("日期的 MD5 前六位:", dateMd5FirstSix);
+            mdui.snackbar({
+  message: "查看F12可获得关键信息 请自行配置api地址 日期MD5:" + dateMd5FirstSix
+});
+            // 构造新的字符串并加密
+            const newString = `你好${dateMd5FirstSix}`;
+            const token = md5(newString);
+            console.log("最终的 Token:", token);
+
+            // 将 token 保存到全局变量
+            window.token = token;
+            console.log("Token 已保存到全局变量:", window.token);
+
+            // 显示在页面上
+            document.getElementById('token').textContent = token;
+            mdui.snackbar({
+  message: 'Token已准备好'
+});
+        }
+
+        // 页面加载完成后生成 Token
+        window.onload = generateToken;
+
+        // 添加按钮点击事件，发送请求
+        document.getElementById('sendRequest').addEventListener('click', function() {
+            // 确保 token 已生成
+            if (!window.token) {
+                mdui.snackbar({
+  message: 'Token未生成，请先生成Token再试。'
+});
+                return;
+            }
+
+            // 构造请求体
+            const requestBody = {
+                prompt: "你好",
+                stream: false,
+                token: window.token // 添加 token 字段
+            };
+
+            // 发送 POST 请求
+            fetch('src', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    mdui.snackbar({
+  message: '错误'
+});
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Response from server:", data);
+                alert("Request sent successfully!");
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+               
+                mdui.snackbar({
+  message: "遇到问题: " + error.message +"请自行配置api地址"
+});
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
