@@ -6,6 +6,9 @@
 
 [English](https://github.com/ColudAI/SAI-Talker/blob/main/README_EN.MD)  
 
+
+## 更多
+- ✅ GetToken.html ----> 获取SAIAPI需要的Token 并且还附带了请求代码
 ## 特性
 - ✅ 支持选择文字一键问AI
 - 🖱️ 支持右键问AI
